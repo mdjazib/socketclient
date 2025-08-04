@@ -1,0 +1,242 @@
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: Arial, Helvetica, sans-serif
+
+@mixin flex($j,$a,$d,$g)
+    display: flex
+    justify-content: $j
+    align-items: $a
+    flex-direction: $d
+    gap: $g
+
+@keyframes loading
+    100%
+        rotate: 360deg
+
+:root
+    --base-color: hsl(178, 5%, 5%)
+    --accent-color: hsl(168, 49%, 47%)
+    --text-color: hsl(0, 0%, 100%)
+
+.body
+    background-color: hsl(from var(--base-color) h s l)
+    height: 100svh
+    width: 100%
+    @include flex(center,center,row,10px)
+    padding: 14px 12px
+    .chats
+        background-color: hsl(from var(--base-color) h s calc(l + 1))
+        height: 100%
+        width: 100%
+        max-width: 300px
+        border-radius: 6px
+        padding: 12px 12px 0px 12px
+        @include flex(flex-start,flex-start,column,6px)
+        .onchats
+            @include flex(flex-start,flex-start,column,0px)
+            overflow-y: overlay
+            width: inherit
+            height: 100%
+            padding: 4px 0
+            &::-webkit-scrollbar
+                display: none
+            .new
+                background-color: hsl(from var(--accent-color) h s l / .05) !important
+                .col
+                    .avatar
+                        background-color: hsl(from var(--accent-color) h s l / .1) !important
+            .active
+                background-color: hsl(from var(--base-color) h s calc(l + 3))
+                .col
+                    .avatar
+                        color: hsl(from var(--accent-color) h s l) !important
+            .chat
+                transition: .2s ease
+                width: 100%
+                padding: 8px
+                @include flex(space-between,center,row,10px)
+                border-radius: 6px
+                cursor: pointer
+                &:hover
+                    background-color: hsl(from var(--base-color) h s calc(l + 3))
+                    .col
+                        .avatar
+                            color: hsl(from var(--accent-color) h s l) !important
+                .col
+                    &:nth-last-child(1)
+                        @include flex(flex-end,center,row,6px)
+                        .badge
+                            background-color: hsl(from var(--accent-color) h s l)
+                            color: hsl(from var(--base-color) h s l)
+                            font-size: 10px
+                            width: 16px
+                            height: 16px
+                            border-radius: 100px
+                            @include flex(center,center,row,0px)
+                            font-weight: 600
+                        svg
+                            cursor: pointer
+                            width: 18px
+                            height: 18px
+                            color: hsl(from var(--text-color) h s calc(l - 50))
+                    &:nth-child(1)
+                        width: 100%
+                        @include flex(flex-start,center,row,10px)
+                        .avatar
+                            transition: .2s ease
+                            background-color: hsl(from var(--base-color) h s calc(l + 10))
+                            width: 40px
+                            text-transform: capitalize
+                            height: 40px
+                            border-radius: 100px
+                            @include flex(center,center,row,0px)
+                            color: hsl(from var(--text-color) h s calc(l - 20))
+                            font-size: 12px
+                            font-weight: 600
+                            letter-spacing: 1px
+                        .row
+                            @include flex(flex-start,flex-start,column,2px)
+                            h4
+                                font-size: 14px
+                                color: hsl(from var(--text-color) h s l)
+                            p
+                                font-size: 11px
+                                color: hsl(from var(--text-color) h s calc(l - 60))
+        .search
+            position: relative
+            width: 100%
+            input
+                width: 100%
+                background-color: hsl(from var(--base-color) h s calc(l + 3))
+                padding: 12px 12px 12px 34px
+                border-radius: 6px
+                outline: none
+                border: none
+                color: hsl(from var(--text-color) h s l)
+                &::placeholder
+                    color: hsl(from var(--text-color) h s calc(l - 60))
+            svg
+                position: absolute
+                top: 50%
+                left: 12px
+                transform: translateY(-50%)
+                color: hsl(from var(--text-color) h s calc(l - 50))
+                height: 14px
+                width: 14px
+        .profile
+            background-color: hsl(from var(--base-color) h s calc(l + 3))
+            border-radius: inherit
+            padding: 12px
+            width: 100%
+            @include flex(space-between,center,row,10px)
+            .col
+                &:nth-last-child(1)
+                    svg
+                        cursor: pointer
+                        width: 18px
+                        height: 18px
+                        color: hsl(from var(--text-color) h s calc(l - 50))
+                &:nth-child(1)
+                    width: 100%
+                    @include flex(flex-start,center,row,10px)
+                    .avatar
+                        background-color: hsl(from var(--accent-color) h s l)
+                        width: 40px
+                        height: 40px
+                        border-radius: 100px
+                        @include flex(center,center,row,0px)
+                        text-transform: capitalize
+                        color: hsl(from var(--base-color) h s l)
+                        font-size: 14px
+                        font-weight: 600
+                        letter-spacing: 1px
+                    .row
+                        @include flex(flex-start,flex-start,column,2px)
+                        h4
+                            font-size: 14px
+                            color: hsl(from var(--text-color) h s l)
+                        p
+                            font-size: 11px
+                            color: hsl(from var(--text-color) h s calc(l - 60))
+    .bx
+        border-radius: 6px
+        background-color: hsl(from var(--base-color) h s calc(l + 1))
+        width: 100%
+        height: 100%
+        padding: 20px
+    .auth
+        @include flex(center,center,row,0px)
+        .connecting
+            @include flex(center,center,row,10px)
+            p,svg
+                color: hsl(from var(--text-color) h s calc(l - 40))
+            svg
+                animation: loading 1s linear infinite
+        form
+            width: 100%
+            max-width: 350px
+            input
+                width: 100%
+                padding: 12px
+                outline: none
+                border: 1px solid hsl(from var(--base-color) h s calc(l + 6))
+                color: hsl(from var(--text-color) h s l)
+                border-radius: 5px
+                background-color: hsl(from var(--base-color) h s calc(l + 3))
+                &::placeholder
+                    color: hsl(from var(--text-color) h s calc(l - 60))
+    .chatbox
+        @include flex(flex-start,flex-start,column,0px)
+        form
+            width: 100%
+            input
+                background-color: hsl(from var(--base-color) h s calc(l + 3))
+                padding: 12px
+                width: 100%
+                outline: none
+                border: 1px solid hsl(from var(--base-color) h s calc(l + 6))
+                color: hsl(from var(--text-color) h s l)
+                border-radius: 5px
+                background-color: hsl(from var(--base-color) h s calc(l + 3))
+                &::placeholder
+                    color: hsl(from var(--text-color) h s calc(l - 60))
+        .content
+            width: 100%
+            height: 100%
+            @include flex(flex-start,flex-start,column,10px)
+            overflow-y: overlay
+            padding-top: 16px
+            &::-webkit-scrollbar
+                display: none
+            .msg
+                width: 100%
+                .c
+                    color: hsl(from var(--text-color) h s calc(l - 40))
+                    max-width: 80%
+                    font-size: 14px
+            .from
+                @include flex(flex-end,center,row,0px)
+                .c
+                    padding: 10px
+                    border-radius: 6px
+                    background-color: hsl(from var(--base-color) h s calc(l + 5))
+            .to
+                @include flex(flex-start,center,row,0px)
+        .head
+            @include flex(flex-start,center,row,10px)
+            .avatar
+                transition: .2s ease
+                background-color: hsl(from var(--base-color) h s calc(l + 10))
+                width: 40px
+                text-transform: capitalize
+                height: 40px
+                border-radius: 100px
+                @include flex(center,center,row,0px)
+                color: hsl(from var(--text-color) h s calc(l - 20))
+                font-size: 12px
+                font-weight: 600
+                letter-spacing: 1px
+            h4
+                color: hsl(from var(--text-color) h s calc(l - 40))
